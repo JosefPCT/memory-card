@@ -27,7 +27,6 @@ export function Home(){
               return [...prevPokes, {name: data.name, urlPic: data.sprites.other['official-artwork'].front_default}];
             }
            }));
-
           }
         );
       } catch (err) {
@@ -46,7 +45,20 @@ export function Home(){
   return(
     <div>
         <h1>Memory Game</h1>
-        <a href="#"><img src='#' alt="" /></a>
+        <ul>
+          {
+          /* {pokemons.length === 0 ? <p>True</p> : <p>False</p>} */
+          pokemons.map((poke) => {
+            return <li key={poke.name}>
+              <button>
+                <img src={poke.urlPic} alt={poke.name} />
+                {poke.name}
+              </button>
+              </li>
+          })
+          }
+        </ul>
+        <p>Test</p>
         
     </div>
 
