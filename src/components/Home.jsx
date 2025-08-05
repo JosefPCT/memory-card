@@ -18,7 +18,15 @@ export function Home(){
             const data = await response.json();
             // console.log('test');
             // addPokemon(data);
-           setPokemons((prevPokes => [...prevPokes, {name: data.name, urlPic: data.sprites.other['official-artwork'].front_default}]));
+           setPokemons((prevPokes => {
+            const existingPokemon = prevPokes.find((poke) => poke.name === data.name);
+            if(existingPokemon){
+              console.log('existing pokemon');
+              return prevPokes;
+            } else {
+              return [...prevPokes, {name: data.name, urlPic: data.sprites.other['official-artwork'].front_default}];
+            }
+           }));
 
           }
         );
