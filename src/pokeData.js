@@ -25,5 +25,9 @@ export const pokeData = [
   {
     name: 'charmeleon',
     url: 'https://pokeapi.co/api/v2/pokemon/charmeleon',
+  },
+  {
+    name: 'bulbasaur',
+    url: 'https://pokeapi.co/api/v2/pokemon/bulbasaur',
   }
 ];

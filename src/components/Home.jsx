@@ -38,6 +38,10 @@ export function Home(){
     fetchPokemons();
   }, []);
 
+  function clickEventHandler(e){
+    console.log(e.target);
+  }
+
 
   if(loading) return <div>Loading...</div>;
   if(error) return <div>Error: {error}</div>;
@@ -50,7 +54,7 @@ export function Home(){
           /* {pokemons.length === 0 ? <p>True</p> : <p>False</p>} */
           pokemons.map((poke) => {
             return <li key={poke.name}>
-              <button>
+              <button onClick={clickEventHandler}>
                 <img src={poke.urlPic} alt={poke.name} />
                 {poke.name}
               </button>
