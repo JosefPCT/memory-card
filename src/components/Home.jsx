@@ -1,43 +1,47 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { pokeData } from "../pokeData";
 
 export function Home(){
+  const [pokemons, setPokemons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    let url = 'https://pokeapi.co/api/v2/pokemon/ditto';
-    
-    // const test = async () => {
-    //     const testmore = await fetch('https://pokeapi.co/api/v2/pokemon/ditto');
-    //     const res = await testmore.json();
-    //     console.log(res.sprites.other['official-artwork'].front_default);
-    //     // return res.sprites.other['official-artwork'].front_default;
-    // }
-
-    const [data, setData] = useState(null);
-    useEffect(() => {
-      const fetchData = async() => {
-        try {
-            const resp = await fetch(url);
-            if(!resp.ok){
-                throw new Error(`Error!! {resp.status}`);
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      try {
+        pokeData.map(async(pokemon) => {
+            const response = await fetch(pokemon.url);
+            if(!response.ok){
+              throw new Error(`Network response was not okay`);
             }
-            const result = await resp.json();
-            setData(result.sprites.other['official-artwork'].front_default);
-        } catch (err){
-            console.log(err);
-        }
-      };
-      fetchData();
-    });
+            const data = await response.json();
+            // console.log('test');
+            // addPokemon(data);
+           setPokemons((prevPokes => [...prevPokes, {name: data.name, urlPic: data.sprites.other['official-artwork'].front_default}]));
 
-    // let x = test();
+          }
+        );
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPokemons();
+  }, []);
+
+
+  if(loading) return <div>Loading...</div>;
+  if(error) return <div>Error: {error}</div>;
+  console.log(pokemons);
+  return(
+    <div>
+        <h1>Memory Game</h1>
+        <a href="#"><img src='#' alt="" /></a>
+        
+    </div>
+
     
-
-    return(
-      <div>
-          <h1>Memory Game</h1>
-          <a href="#"><img src={data} alt="" /></a>
-      </div>
-
-      
-    );
+  );
 }
