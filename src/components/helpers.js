@@ -23,14 +23,14 @@
 // }
 
 
-export function shuffle(arr){
-    // console.log('shuffle');
-    // console.log(arrState);
-    // let arr = [];
+export function shuffle(arrState){
+    console.log('shuffle');
+    console.log(arrState);
+    let arr = [];
 
-    // arrState.forEach(element => {
-    //     arr.push(element);
-    // });
+    arrState.forEach(element => {
+        arr.push(element);
+    });
 
     let currIndex = arr.length;
     let randomIndex;
