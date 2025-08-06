@@ -24,6 +24,14 @@
 
 
 export function shuffle(arr){
+    // console.log('shuffle');
+    // console.log(arrState);
+    // let arr = [];
+
+    // arrState.forEach(element => {
+    //     arr.push(element);
+    // });
+
     let currIndex = arr.length;
     let randomIndex;
 
@@ -32,7 +40,7 @@ export function shuffle(arr){
         currIndex--;
 
         [arr[currIndex], arr[randomIndex]] = [arr[randomIndex], arr[currIndex]];
+  
     }
-
     return arr;
 }

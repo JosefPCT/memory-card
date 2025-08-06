@@ -41,15 +41,20 @@ export function Home(){
 
   function clickEventHandler(e){
     console.log(e.target);
+    console.log(pokemons);
+    let test = shuffle(pokemons);
+    console.log('extraced arr');
+    console.log(test);
+    setPokemons(test);
+    console.log(pokemons);
   }
-
   
 
 
   if(loading) return <div>Loading...</div>;
   if(error) return <div>Error: {error}</div>;
   console.log(pokemons);
-  shuffle(pokemons);
+  
   return(
     <div>
         <h1>Memory Game</h1>
