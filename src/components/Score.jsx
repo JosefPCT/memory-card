@@ -1,5 +1,5 @@
 export function Score({currentScore, topScore}){
-  console.log('Score component');
+//   console.log('Score component');
   return(
     <div id='scoreboard'>
       <p id='currentScore'>{currentScore}</p>

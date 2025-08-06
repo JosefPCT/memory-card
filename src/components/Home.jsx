@@ -11,6 +11,7 @@ export function Home(){
   const [clickedPokemons, setClickedPokemons] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [topScore, setTopScore] = useState(0);
+  const [win, setWin] = useState(false);
 
   // Run once
   useEffect(() => {
@@ -47,11 +48,18 @@ export function Home(){
   // Handler for clicking a picture
   function clickEventHandler(e){
     // console.log(e.target.dataset.pokename);
-    console.log(e.target.tagName);
+    // console.log(e.target.tagName);
     let targ;
     targ = e.target.tagName !== 'BUTTON' ? e.target.parentNode : e.target;
-    console.log(targ);
-    console.log(targ.dataset.pokename);
+
+    if(currentScore === pokemons.length){
+      console.log('Winner');
+      setWin(true);
+      return;
+    }
+
+    // console.log(targ);
+    // console.log(targ.dataset.pokename);
     if(clickedPokemons.includes(targ.dataset.pokename)){
       console.log('Already clicked');
       if(currentScore > topScore){
@@ -61,10 +69,11 @@ export function Home(){
       setClickedPokemons([]);
     } else {
       // Score
+
       setCurrentScore(currentScore + 1);
       setClickedPokemons((prevClicked) => [...prevClicked, targ.dataset.pokename]);
     } 
-    console.log(clickedPokemons);
+    // console.log(clickedPokemons);
     
 
     // Shuffle the pokemons
@@ -77,10 +86,10 @@ export function Home(){
   }
   
 
-
+  if(win) return <div>Winner!</div>
   if(loading) return <div>Loading...</div>;
   if(error) return <div>Error: {error}</div>;
-  console.log(pokemons);
+  // console.log(pokemons);
   
   return(
     <div>

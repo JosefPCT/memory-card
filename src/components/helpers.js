@@ -25,7 +25,7 @@
 
 export function shuffle(arrState){
     console.log('shuffle');
-    console.log(arrState);
+    // console.log(arrState);
     let arr = [];
 
     arrState.forEach(element => {
