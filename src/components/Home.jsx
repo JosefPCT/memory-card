@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { pokeData } from "../pokeData";
+import { shuffle } from "./helpers";
 
 export function Home(){
   const [pokemons, setPokemons] = useState([]);
@@ -42,10 +43,13 @@ export function Home(){
     console.log(e.target);
   }
 
+  
+
 
   if(loading) return <div>Loading...</div>;
   if(error) return <div>Error: {error}</div>;
   console.log(pokemons);
+  shuffle(pokemons);
   return(
     <div>
         <h1>Memory Game</h1>
