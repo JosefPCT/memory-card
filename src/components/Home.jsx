@@ -7,6 +7,8 @@ export function Home(){
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [topScore, setTopScore] = useState(0);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -41,12 +43,11 @@ export function Home(){
 
   function clickEventHandler(e){
     console.log(e.target);
-    console.log(pokemons);
+
+
+    // Shuffle the pokemons
     let test = shuffle(pokemons);
-    console.log('extraced arr');
-    console.log(test);
     setPokemons(test);
-    console.log(pokemons);
   }
   
 
@@ -71,8 +72,7 @@ export function Home(){
           })
           }
         </ul>
-        <p>Test</p>
-        
+        <p>Test</p>        
     </div>
 
     
