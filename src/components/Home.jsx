@@ -2,14 +2,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { pokeData } from "../pokeData";
 import { shuffle } from "./helpers";
+import { Score } from "./Score";
 
 export function Home(){
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [clickedPokemons, setClickedPokemons] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [topScore, setTopScore] = useState(0);
 
+  // Run once
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
@@ -41,13 +44,36 @@ export function Home(){
     fetchPokemons();
   }, []);
 
+  // Handler for clicking a picture
   function clickEventHandler(e){
-    console.log(e.target);
-
+    // console.log(e.target.dataset.pokename);
+    console.log(e.target.tagName);
+    let targ;
+    targ = e.target.tagName !== 'BUTTON' ? e.target.parentNode : e.target;
+    console.log(targ);
+    console.log(targ.dataset.pokename);
+    if(clickedPokemons.includes(targ.dataset.pokename)){
+      console.log('Already clicked');
+      if(currentScore > topScore){
+        setTopScore(currentScore);
+      }
+      setCurrentScore(0);
+      setClickedPokemons([]);
+    } else {
+      // Score
+      setCurrentScore(currentScore + 1);
+      setClickedPokemons((prevClicked) => [...prevClicked, targ.dataset.pokename]);
+    } 
+    console.log(clickedPokemons);
+    
 
     // Shuffle the pokemons
     let test = shuffle(pokemons);
     setPokemons(test);
+  }
+
+  function scoreHandler(e){
+
   }
   
 
@@ -59,14 +85,16 @@ export function Home(){
   return(
     <div>
         <h1>Memory Game</h1>
+        <Score currentScore={currentScore} topScore={topScore}/>
         <ul>
           {
           /* {pokemons.length === 0 ? <p>True</p> : <p>False</p>} */
           pokemons.map((poke) => {
             return <li key={poke.name}>
-              <button onClick={clickEventHandler}>
+              <button onClick={clickEventHandler} data-pokename={poke.name}>
                 <img src={poke.urlPic} alt={poke.name} />
                 {poke.name}
+                <p>Pokename</p>
               </button>
               </li>
           })
